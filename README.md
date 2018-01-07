@@ -1,4 +1,4 @@
-## Running Webcore Sample (Website CMS)
+## Sample of Running Webcore as Website CMS
 
 ### Installation
 
