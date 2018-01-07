@@ -43,7 +43,7 @@ Default users are
 
 * Sample front page
 
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+![alt text](https://drive.google.com/file/d/16SVT-SEMa8bbxY4EP6z-qnYo24Bce_jh/view "Logo Title Text 1")
 
 * Login page
 
