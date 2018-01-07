@@ -43,21 +43,21 @@ Default users are
 
 * Sample front page
 
-![alt text](https://github.com/dandisy/webcore-screenshots/blob/master/sample%20front%20page.png "Logo Title Text 1")
+![sample front page](https://github.com/dandisy/webcore-screenshots/blob/master/sample%20front%20page.png)
 
 * Login page
 
-![login page](https://drive.google.com/file/d/1Gu-GhVUrgQQouVnBf77yN5t-pDZl3m2z/view)
+![login page](https://github.com/dandisy/webcore-screenshots/blob/master/login%20page.png)
 
 * Admin page
 
-![admin page 1](https://drive.google.com/file/d/1wpVnVieuJTNOcfUlRtkmxRiZyXI1fsod/view)
+![admin page 1](https://github.com/dandisy/webcore-screenshots/blob/master/admin%20page%201.png)
 
-![admin page 2](https://drive.google.com/file/d/1UaTmLf8o5z7NM95CyIbyJfOj1QguT53n/view)
+![admin page 2](https://github.com/dandisy/webcore-screenshots/blob/master/admin%20page%202.png)
 
-![admin page 3](https://drive.google.com/file/d/1Dj-1A7V0HtJafh8ZdcfTTissHs_L7JEq/view)
+![admin page 3](https://github.com/dandisy/webcore-screenshots/blob/master/admin%20page%203.png)
 
-![admin page 4](https://drive.google.com/file/d/1Tk0QkjUTZkFVXmWoCDNBxVP5fsoPtTDN/view)
+![admin page 4](https://github.com/dandisy/webcore-screenshots/blob/master/admin%20page%204.png)
 
 
 #
