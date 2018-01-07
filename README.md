@@ -27,9 +27,9 @@ then
 
 Now you can browse to
 
-    http://localhost/webcore/public
+    http://localhost/webcore-sample/public
     or
-    http://localhost/webcore/public/admin
+    http://localhost/webcore-sample/public/admin
 
 Default users are
 
