@@ -39,6 +39,26 @@ Default users are
 
     with default password is password
 
+### Screenshots
+
+* Sample front page
+
+![sample front page](https://drive.google.com/file/d/16SVT-SEMa8bbxY4EP6z-qnYo24Bce_jh/view)
+
+* Login page
+
+![login page](https://drive.google.com/file/d/1Gu-GhVUrgQQouVnBf77yN5t-pDZl3m2z/view)
+
+* Admin page
+
+![admin page 1](https://drive.google.com/file/d/1wpVnVieuJTNOcfUlRtkmxRiZyXI1fsod/view)
+
+![admin page 2](https://drive.google.com/file/d/1UaTmLf8o5z7NM95CyIbyJfOj1QguT53n/view)
+
+![admin page 3](https://drive.google.com/file/d/1Dj-1A7V0HtJafh8ZdcfTTissHs_L7JEq/view)
+
+![admin page 4](https://drive.google.com/file/d/1Tk0QkjUTZkFVXmWoCDNBxVP5fsoPtTDN/view)
+
 
 #
 by dandi@redbuzz.co.id
