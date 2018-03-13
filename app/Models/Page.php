@@ -72,6 +72,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *          format="int32"
  *      ),
  *      @SWG\Property(
+ *          property="updated_by",
+ *          description="updated_by",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
  *          property="created_at",
  *          description="created_at",
  *          type="string",
@@ -106,7 +112,8 @@ class Page extends Model
         'language',
         'template',
         'status',
-        'created_by'
+        'created_by',
+        'updated_by'
     ];
 
     /**
@@ -125,7 +132,8 @@ class Page extends Model
         'language' => 'string',
         'template' => 'string',
         'status' => 'string',
-        'created_by' => 'integer'
+        'created_by' => 'integer',
+        'updated_by' => 'integer'
     ];
 
     /**
@@ -140,6 +148,10 @@ class Page extends Model
         'template' => 'required',
         'status' => 'required'
     ];
+
+    public function getTableColumns() {
+        return $this->getConnection()->getSchemaBuilder()->getColumnListing($this->getTable());
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

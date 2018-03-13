@@ -8,31 +8,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * @SWG\Definition(
  *      definition="Presentation",
- *      required={"component", "position", "page_id"},
+ *      required={"page_id", "media", "component_id", "position"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="component",
- *          description="component",
- *          type="string"
- *      ),
- *      @SWG\Property(
- *          property="position",
- *          description="position",
- *          type="string"
- *      ),
- *      @SWG\Property(
- *          property="datasource",
- *          description="datasource",
- *          type="string"
- *      ),
- *      @SWG\Property(
- *          property="order",
- *          description="order",
  *          type="integer",
  *          format="int32"
  *      ),
@@ -43,8 +22,35 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *          format="int32"
  *      ),
  *      @SWG\Property(
+ *          property="media",
+ *          description="media",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
+ *          property="component_id",
+ *          description="component_id",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
+ *          property="position",
+ *          description="position",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
+ *          property="order",
+ *          description="order",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
  *          property="created_by",
  *          description="created_by",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="updated_by",
+ *          description="updated_by",
  *          type="integer",
  *          format="int32"
  *      ),
@@ -73,12 +79,13 @@ class Presentation extends Model
 
 
     public $fillable = [
-        'component',
-        'position',
-        'datasource',
-        'order',
         'page_id',
-        'created_by'
+        'media',
+        'component_id',
+        'position',
+        'order',
+        'created_by',
+        'updated_by'
     ];
 
     /**
@@ -87,12 +94,13 @@ class Presentation extends Model
      * @var array
      */
     protected $casts = [
-        'component' => 'string',
-        'position' => 'string',
-        'datasource' => 'string',
-        'order' => 'integer',
         'page_id' => 'integer',
-        'created_by' => 'integer'
+        'media' => 'string',
+        'component_id' => 'string',
+        'position' => 'string',
+        'order' => 'integer',
+        'created_by' => 'integer',
+        'updated_by' => 'integer'
     ];
 
     /**
@@ -101,10 +109,29 @@ class Presentation extends Model
      * @var array
      */
     public static $rules = [
-        'component' => 'required',
-        'position' => 'required',
-        'page_id' => 'required'
+        'page_id' => 'required',
+        'media' => 'required',
+        'component_id' => 'required',
+        'position' => 'required'
     ];
 
-    
+    public function getTableColumns() {
+        return $this->getConnection()->getSchemaBuilder()->getColumnListing($this->getTable());
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function page()
+    {
+        return $this->belongsTo(\App\Models\Page::class, 'page_id', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function component()
+    {
+        return $this->belongsTo(\App\Models\Component::class, 'component_id', 'id');
+    }
 }

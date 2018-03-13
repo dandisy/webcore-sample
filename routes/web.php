@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Page;
 //use App\Models\MenuItem;
 use Illuminate\Http\Request;
 use League\Glide\ServerFactory;
@@ -19,8 +18,8 @@ use Illuminate\Contracts\Filesystem\Filesystem;
 */
 
 Route::get('/', function () {
-    // return view('welcome');
     return redirect('home');
+    // return view('welcome');
 });
 
 
@@ -32,11 +31,11 @@ Auth::routes();
 // });
 
 Route::get('/admin', function () {
-    //if(Laratrust::hasRole(['administrator','superadministrator'])) {
+    // if(Laratrust::hasRole(['administrator','superadministrator'])) {
         return redirect('dashboard');
-    /*} else {
-        return redirect('home');
-    }*/
+    // } else {
+    //     return redirect('home');
+    // }
 });
 
 Route::group(['middleware' => 'auth'], function () {    
@@ -55,9 +54,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => ['role:superadministrator|administrator']], function () {
         Route::resource('users', 'UserController');
 
+        Route::resource('profiles', 'ProfileController');
+
         Route::resource('roles', 'RoleController');
 
-        //Route::resource('permissions', 'PermissionController');
+        Route::resource('permissions', 'PermissionController');
 
         Route::resource('settings', 'SettingController');
     });
@@ -96,16 +97,6 @@ Route::get('admin/posts/{posts}', ['as'=> 'admin.posts.show', 'uses' => 'Admin\P
 Route::get('admin/posts/{posts}/edit', ['as'=> 'admin.posts.edit', 'uses' => 'Admin\PostController@edit']);
 // Route::post('importPost', 'Admin\PostController@import');
 
-Route::get('admin/banners', ['as'=> 'admin.banners.index', 'uses' => 'Admin\BannerController@index']);
-Route::post('admin/banners', ['as'=> 'admin.banners.store', 'uses' => 'Admin\BannerController@store']);
-Route::get('admin/banners/create', ['as'=> 'admin.banners.create', 'uses' => 'Admin\BannerController@create']);
-Route::put('admin/banners/{banners}', ['as'=> 'admin.banners.update', 'uses' => 'Admin\BannerController@update']);
-Route::patch('admin/banners/{banners}', ['as'=> 'admin.banners.update', 'uses' => 'Admin\BannerController@update']);
-Route::delete('admin/banners/{banners}', ['as'=> 'admin.banners.destroy', 'uses' => 'Admin\BannerController@destroy']);
-Route::get('admin/banners/{banners}', ['as'=> 'admin.banners.show', 'uses' => 'Admin\BannerController@show']);
-Route::get('admin/banners/{banners}/edit', ['as'=> 'admin.banners.edit', 'uses' => 'Admin\BannerController@edit']);
-// Route::post('importBanner', 'Admin\BannerController@import');
-
 Route::get('admin/presentations', ['as'=> 'admin.presentations.index', 'uses' => 'Admin\PresentationController@index']);
 Route::post('admin/presentations', ['as'=> 'admin.presentations.store', 'uses' => 'Admin\PresentationController@store']);
 Route::get('admin/presentations/create', ['as'=> 'admin.presentations.create', 'uses' => 'Admin\PresentationController@create']);
@@ -115,3 +106,43 @@ Route::delete('admin/presentations/{presentations}', ['as'=> 'admin.presentation
 Route::get('admin/presentations/{presentations}', ['as'=> 'admin.presentations.show', 'uses' => 'Admin\PresentationController@show']);
 Route::get('admin/presentations/{presentations}/edit', ['as'=> 'admin.presentations.edit', 'uses' => 'Admin\PresentationController@edit']);
 // Route::post('importPresentation', 'Admin\PresentationController@import');
+
+Route::get('admin/components', ['as'=> 'admin.components.index', 'uses' => 'Admin\ComponentController@index']);
+Route::post('admin/components', ['as'=> 'admin.components.store', 'uses' => 'Admin\ComponentController@store']);
+Route::get('admin/components/create', ['as'=> 'admin.components.create', 'uses' => 'Admin\ComponentController@create']);
+Route::put('admin/components/{components}', ['as'=> 'admin.components.update', 'uses' => 'Admin\ComponentController@update']);
+Route::patch('admin/components/{components}', ['as'=> 'admin.components.update', 'uses' => 'Admin\ComponentController@update']);
+Route::delete('admin/components/{components}', ['as'=> 'admin.components.destroy', 'uses' => 'Admin\ComponentController@destroy']);
+Route::get('admin/components/{components}', ['as'=> 'admin.components.show', 'uses' => 'Admin\ComponentController@show']);
+Route::get('admin/components/{components}/edit', ['as'=> 'admin.components.edit', 'uses' => 'Admin\ComponentController@edit']);
+// Route::post('importComponent', 'Admin\ComponentController@import');
+
+Route::get('admin/dataSources', ['as'=> 'admin.dataSources.index', 'uses' => 'Admin\DataSourceController@index']);
+Route::post('admin/dataSources', ['as'=> 'admin.dataSources.store', 'uses' => 'Admin\DataSourceController@store']);
+Route::get('admin/dataSources/create', ['as'=> 'admin.dataSources.create', 'uses' => 'Admin\DataSourceController@create']);
+Route::put('admin/dataSources/{dataSources}', ['as'=> 'admin.dataSources.update', 'uses' => 'Admin\DataSourceController@update']);
+Route::patch('admin/dataSources/{dataSources}', ['as'=> 'admin.dataSources.update', 'uses' => 'Admin\DataSourceController@update']);
+Route::delete('admin/dataSources/{dataSources}', ['as'=> 'admin.dataSources.destroy', 'uses' => 'Admin\DataSourceController@destroy']);
+Route::get('admin/dataSources/{dataSources}', ['as'=> 'admin.dataSources.show', 'uses' => 'Admin\DataSourceController@show']);
+Route::get('admin/dataSources/{dataSources}/edit', ['as'=> 'admin.dataSources.edit', 'uses' => 'Admin\DataSourceController@edit']);
+// Route::post('importDataSource', 'Admin\DataSourceController@import');
+
+Route::get('admin/dataQueries', ['as'=> 'admin.dataQueries.index', 'uses' => 'Admin\DataQueryController@index']);
+Route::post('admin/dataQueries', ['as'=> 'admin.dataQueries.store', 'uses' => 'Admin\DataQueryController@store']);
+Route::get('admin/dataQueries/create', ['as'=> 'admin.dataQueries.create', 'uses' => 'Admin\DataQueryController@create']);
+Route::put('admin/dataQueries/{dataQueries}', ['as'=> 'admin.dataQueries.update', 'uses' => 'Admin\DataQueryController@update']);
+Route::patch('admin/dataQueries/{dataQueries}', ['as'=> 'admin.dataQueries.update', 'uses' => 'Admin\DataQueryController@update']);
+Route::delete('admin/dataQueries/{dataQueries}', ['as'=> 'admin.dataQueries.destroy', 'uses' => 'Admin\DataQueryController@destroy']);
+Route::get('admin/dataQueries/{dataQueries}', ['as'=> 'admin.dataQueries.show', 'uses' => 'Admin\DataQueryController@show']);
+Route::get('admin/dataQueries/{dataQueries}/edit', ['as'=> 'admin.dataQueries.edit', 'uses' => 'Admin\DataQueryController@edit']);
+// Route::post('importDataQuery', 'Admin\DataQueryController@import');
+
+Route::get('admin/dataColumns', ['as'=> 'admin.dataColumns.index', 'uses' => 'Admin\DataColumnController@index']);
+Route::post('admin/dataColumns', ['as'=> 'admin.dataColumns.store', 'uses' => 'Admin\DataColumnController@store']);
+Route::get('admin/dataColumns/create', ['as'=> 'admin.dataColumns.create', 'uses' => 'Admin\DataColumnController@create']);
+Route::put('admin/dataColumns/{dataColumns}', ['as'=> 'admin.dataColumns.update', 'uses' => 'Admin\DataColumnController@update']);
+Route::patch('admin/dataColumns/{dataColumns}', ['as'=> 'admin.dataColumns.update', 'uses' => 'Admin\DataColumnController@update']);
+Route::delete('admin/dataColumns/{dataColumns}', ['as'=> 'admin.dataColumns.destroy', 'uses' => 'Admin\DataColumnController@destroy']);
+Route::get('admin/dataColumns/{dataColumns}', ['as'=> 'admin.dataColumns.show', 'uses' => 'Admin\DataColumnController@show']);
+Route::get('admin/dataColumns/{dataColumns}/edit', ['as'=> 'admin.dataColumns.edit', 'uses' => 'Admin\DataColumnController@edit']);
+// Route::post('importDataColumn', 'Admin\DataColumnController@import');

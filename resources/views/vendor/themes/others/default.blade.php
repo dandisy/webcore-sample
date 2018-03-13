@@ -1,0 +1,1 @@
+<h1>Others Theme</h1>

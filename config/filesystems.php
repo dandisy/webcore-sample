@@ -68,6 +68,21 @@ return [
             'root' => public_path('storage'),
         ],
 
+        'component' => [
+            'driver' => 'local',
+            'root' => resource_path('views/vendor/components'),
+        ],
+
+        'theme' => [
+            'driver' => 'local',
+            'root' => resource_path('views/vendor/themes'),
+        ],
+
+        'model' => [
+            'driver' => 'local',
+            'root' => app_path('Models'),
+        ],
+
     ],
 
 ];

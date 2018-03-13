@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 
-    <title>Webcore Platform</title>
+    <title>Webcore</title>
 
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/plugins/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/plugins//font-awesome/css/font-awesome.min.css') }}">
@@ -33,6 +33,9 @@
 
     <!-- include Fileuploader -->
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/plugins/fileuploader/jquery.fileuploader.css') }}">
+
+    <!-- include Multi-select -->
+    <link rel="stylesheet" href="{{ asset('vendor/adminlte/plugins/multi-select/css/multi-select.css') }}">
 
     <style>
         .main-header {
@@ -64,8 +67,8 @@
         <header class="main-header">
 
             <!-- Logo -->
-            <a href="#" class="logo">
-                <b>WebCORE</b>
+            <a href="{{ url('/dashboard') }}" class="logo">
+                <b>Webcore</b>
             </a>
 
             <!-- Header Navbar -->
@@ -216,6 +219,12 @@
     <!-- Fileuploader -->
     <script src="{{ asset('vendor/adminlte/plugins/fileuploader/jquery.fileuploader.min.js') }}"></script>
 
+    <!-- Multi-select -->
+    <script src="{{ asset('vendor/adminlte/plugins/multi-select/js/jquery.multi-select.js') }}"></script>
+
+    <!-- Quicksearch -->
+    <script src="{{ asset('vendor/adminlte/plugins/quicksearch/jquery.quicksearch.min.js') }}"></script>
+
     <!-- Input Mask -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.2.6/jquery.inputmask.bundle.min.js"></script>
 
@@ -273,11 +282,49 @@
             });
             // end summernote
 
+            $('#dataTableBuilder').wrap('<div class="table-responsive col-md-12"></div>');
+
             $('.filemanager').fancybox({
                 type : 'iframe'
             });
 
             $(".select2").select2();
+
+            $(".multi-select").multiSelect({
+                selectableHeader: "<input type='text' class='search-input form-control' autocomplete='off' placeholder='Search...'>",
+                selectionHeader: "<input type='text' class='search-input form-control' autocomplete='off' placeholder='Search...'>",
+                afterInit: function(ms){
+                    var that = this,
+                        $selectableSearch = that.$selectableUl.prev(),
+                        $selectionSearch = that.$selectionUl.prev(),
+                        selectableSearchString = '#'+that.$container.attr('id')+' .ms-elem-selectable:not(.ms-selected)',
+                        selectionSearchString = '#'+that.$container.attr('id')+' .ms-elem-selection.ms-selected';
+
+                    that.qs1 = $selectableSearch.quicksearch(selectableSearchString)
+                    .on('keydown', function(e){
+                        if (e.which === 40){
+                            that.$selectableUl.focus();
+                            return false;
+                        }
+                    });
+
+                    that.qs2 = $selectionSearch.quicksearch(selectionSearchString)
+                    .on('keydown', function(e){
+                        if (e.which == 40){
+                            that.$selectionUl.focus();
+                            return false;
+                        }
+                    });
+                },
+                afterSelect: function(){
+                    this.qs1.cache();
+                    this.qs2.cache();
+                },
+                afterDeselect: function(){
+                    this.qs1.cache();
+                    this.qs2.cache();
+                }
+            });
 
             $(".date").datepicker({
                 format:	'yyyy-mm-dd'

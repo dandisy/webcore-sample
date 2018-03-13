@@ -4,6 +4,8 @@
     {!! Form::text('name', null, ['class' => 'form-control']) !!}
 </div>
 
+<div class="clearfix"></div>
+
 <!-- Title Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('title', 'Title:') !!}
@@ -49,13 +51,13 @@
 <!-- Template Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('template', 'Template:') !!}
-    {!! Form::text('template', null, ['class' => 'form-control']) !!}
+    {!! Form::select('template', $themes, null, ['class' => 'form-control select2']) !!}
 </div>
 
 <!-- Status Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('status', 'Status:') !!}
-    {!! Form::select('status', ['pending' => 'Pending', 'publish' => 'Publish'], null, ['class' => 'form-control']) !!}
+    {!! Form::select('status', ['pending' => 'Pending', 'publish' => 'Publish'], null, ['class' => 'form-control select2']) !!}
 </div>
 
 <!-- Submit Field -->

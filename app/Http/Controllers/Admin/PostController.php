@@ -10,6 +10,8 @@ use App\Repositories\PostRepository;
 use Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
+use Illuminate\Support\Facades\Auth; // add by dandisy
+use Illuminate\Support\Facades\Storage; // add by dandisy
 
 class PostController extends AppBaseController
 {
@@ -40,6 +42,11 @@ class PostController extends AppBaseController
      */
     public function create()
     {
+        // add by dandisy
+        
+
+        // edit by dandisy
+        //return view('admin.posts.create');
         return view('admin.posts.create');
     }
 
@@ -53,6 +60,8 @@ class PostController extends AppBaseController
     public function store(CreatePostRequest $request)
     {
         $input = $request->all();
+
+        $input['created_by'] = Auth::user()->id;
 
         $post = $this->postRepository->create($input);
 
@@ -90,6 +99,9 @@ class PostController extends AppBaseController
      */
     public function edit($id)
     {
+        // add by dandisy
+        
+
         $post = $this->postRepository->findWithoutFail($id);
 
         if (empty($post)) {
@@ -98,7 +110,10 @@ class PostController extends AppBaseController
             return redirect(route('admin.posts.index'));
         }
 
-        return view('admin.posts.edit')->with('post', $post);
+        // edit by dandisy
+        //return view('admin.posts.edit')->with('post', $post);
+        return view('admin.posts.edit')
+            ->with('post', $post);
     }
 
     /**
@@ -111,6 +126,10 @@ class PostController extends AppBaseController
      */
     public function update($id, UpdatePostRequest $request)
     {
+        $input = $request->all();
+
+        $input['updated_by'] = Auth::user()->id;
+
         $post = $this->postRepository->findWithoutFail($id);
 
         if (empty($post)) {
@@ -119,7 +138,7 @@ class PostController extends AppBaseController
             return redirect(route('admin.posts.index'));
         }
 
-        $post = $this->postRepository->update($request->all(), $id);
+        $post = $this->postRepository->update($input, $id);
 
         Flash::success('Post updated successfully.');
 

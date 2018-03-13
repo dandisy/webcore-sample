@@ -9,8 +9,9 @@ use App\Http\Requests\Admin\UpdatePageRequest;
 use App\Repositories\PageRepository;
 use Flash;
 use App\Http\Controllers\AppBaseController;
-use Illuminate\Support\Facades\Auth;
 use Response;
+use Illuminate\Support\Facades\Auth; // add by dandisy
+use Illuminate\Support\Facades\Storage; // add by dandisy
 
 class PageController extends AppBaseController
 {
@@ -41,7 +42,23 @@ class PageController extends AppBaseController
      */
     public function create()
     {
-        return view('admin.pages.create');
+        // add by dandisy
+        $presentation = \App\Models\Presentation::all();
+        
+$themes = array_map(function ($file) {
+            $fileName = explode('.', $file);
+            if(count($fileName) > 0) {
+                return $fileName[0];
+            }
+        }, Storage::disk('theme')->allFiles());
+
+        $themes = array_combine($themes, $themes);
+
+        // edit by dandisy
+        //return view('admin.pages.create');
+        return view('admin.pages.create')
+            ->with('presentation', $presentation)
+            ->with('themes', $themes);
     }
 
     /**
@@ -93,6 +110,18 @@ class PageController extends AppBaseController
      */
     public function edit($id)
     {
+        // add by dandisy
+        $presentation = \App\Models\Presentation::all();
+        
+$themes = array_map(function ($file) {
+            $fileName = explode('.', $file);
+            if(count($fileName) > 0) {
+                return $fileName[0];
+            }
+        }, Storage::disk('theme')->allFiles());
+
+        $themes = array_combine($themes, $themes);
+
         $page = $this->pageRepository->findWithoutFail($id);
 
         if (empty($page)) {
@@ -101,7 +130,12 @@ class PageController extends AppBaseController
             return redirect(route('admin.pages.index'));
         }
 
-        return view('admin.pages.edit')->with('page', $page);
+        // edit by dandisy
+        //return view('admin.pages.edit')->with('page', $page);
+        return view('admin.pages.edit')
+            ->with('page', $page)
+            ->with('presentation', $presentation)
+            ->with('themes', $themes);
     }
 
     /**
@@ -114,6 +148,10 @@ class PageController extends AppBaseController
      */
     public function update($id, UpdatePageRequest $request)
     {
+        $input = $request->all();
+
+        $input['updated_by'] = Auth::user()->id;
+
         $page = $this->pageRepository->findWithoutFail($id);
 
         if (empty($page)) {
@@ -122,7 +160,7 @@ class PageController extends AppBaseController
             return redirect(route('admin.pages.index'));
         }
 
-        $page = $this->pageRepository->update($request->all(), $id);
+        $page = $this->pageRepository->update($input, $id);
 
         Flash::success('Page updated successfully.');
 

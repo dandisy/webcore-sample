@@ -53,6 +53,16 @@ class PresentationDataTable extends DataTable
                     'reset',
                     'reload',
                 ],
+                // 'initComplete' => "function() {
+                //     this.api().columns().every(function() {
+                //         var column = this;
+                //         var input = document.createElement(\"input\");
+                //         $(input).appendTo($(column.footer()).empty())
+                //         .on('change', function () {
+                //             column.search($(this).val(), false, false, true).draw();
+                //         });
+                //     });
+                // }",
             ]);
     }
 
@@ -64,12 +74,15 @@ class PresentationDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'component',
-            'position',
-            'datasource',
-            'order',
             'page_id',
-            'created_by'
+            'media',
+            'component_id',
+            'position',
+            'order',
+            'created_by',
+            'updated_by',
+            'created_at',
+            'updated_at'
         ];
     }
 

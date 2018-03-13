@@ -4,10 +4,22 @@
     <p>{!! $presentation->id !!}</p>
 </div>
 
-<!-- Component Field -->
+<!-- Page Id Field -->
 <div class="form-group">
-    {!! Form::label('component', 'Component:') !!}
-    <p>{!! $presentation->component !!}</p>
+    {!! Form::label('page_id', 'Page Id:') !!}
+    <p>{!! $presentation->page_id !!}</p>
+</div>
+
+<!-- Media Field -->
+<div class="form-group">
+    {!! Form::label('media', 'Media:') !!}
+    <p>{!! $presentation->media !!}</p>
+</div>
+
+<!-- Component Id Field -->
+<div class="form-group">
+    {!! Form::label('component_id', 'Component Id:') !!}
+    <p>{!! $presentation->component_id !!}</p>
 </div>
 
 <!-- Position Field -->
@@ -16,28 +28,22 @@
     <p>{!! $presentation->position !!}</p>
 </div>
 
-<!-- Datasource Field -->
-<div class="form-group">
-    {!! Form::label('datasource', 'Datasource:') !!}
-    <p>{!! $presentation->datasource !!}</p>
-</div>
-
 <!-- Order Field -->
 <div class="form-group">
     {!! Form::label('order', 'Order:') !!}
     <p>{!! $presentation->order !!}</p>
 </div>
 
-<!-- Page Id Field -->
-<div class="form-group">
-    {!! Form::label('page_id', 'Page Id:') !!}
-    <p>{!! $presentation->page_id !!}</p>
-</div>
-
 <!-- Created By Field -->
 <div class="form-group">
     {!! Form::label('created_by', 'Created By:') !!}
     <p>{!! $presentation->created_by !!}</p>
+</div>
+
+<!-- Updated By Field -->
+<div class="form-group">
+    {!! Form::label('updated_by', 'Updated By:') !!}
+    <p>{!! $presentation->updated_by !!}</p>
 </div>
 
 <!-- Created At Field -->

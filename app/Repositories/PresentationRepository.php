@@ -8,7 +8,7 @@ use Webcore\Generator\Common\BaseRepository;
 /**
  * Class PresentationRepository
  * @package App\Repositories
- * @version January 4, 2018, 3:34 am UTC
+ * @version March 12, 2018, 8:13 pm UTC
  *
  * @method Presentation findWithoutFail($id, $columns = ['*'])
  * @method Presentation find($id, $columns = ['*'])
@@ -20,12 +20,15 @@ class PresentationRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
-        'component',
-        'position',
-        'datasource',
-        'order',
         'page_id',
-        'created_by'
+        'media',
+        'component_id',
+        'position',
+        'order',
+        'created_by',
+        'updated_by',
+        'created_at',
+        'updated_at'
     ];
 
     /**

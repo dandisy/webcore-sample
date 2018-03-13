@@ -53,6 +53,16 @@ class PostDataTable extends DataTable
                     'reset',
                     'reload',
                 ],
+                // 'initComplete' => "function() {
+                //     this.api().columns().every(function() {
+                //         var column = this;
+                //         var input = document.createElement(\"input\");
+                //         $(input).appendTo($(column.footer()).empty())
+                //         .on('change', function () {
+                //             column.search($(this).val(), false, false, true).draw();
+                //         });
+                //     });
+                // }",
             ]);
     }
 
@@ -64,18 +74,15 @@ class PostDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'name',
             'title',
             'slug',
-            'summary',
-            'description',
             'tag',
             'category',
             'cover',
             'version',
             'language',
             'status',
-            'created_by'
+            'updated_by'
         ];
     }
 

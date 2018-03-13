@@ -78,6 +78,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *          format="int32"
  *      ),
  *      @SWG\Property(
+ *          property="updated_by",
+ *          description="updated_by",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
  *          property="created_at",
  *          description="created_at",
  *          type="string",
@@ -113,7 +119,8 @@ class Post extends Model
         'version',
         'language',
         'status',
-        'created_by'
+        'created_by',
+        'updated_by'
     ];
 
     /**
@@ -133,7 +140,8 @@ class Post extends Model
         'version' => 'string',
         'language' => 'string',
         'status' => 'string',
-        'created_by' => 'integer'
+        'created_by' => 'integer',
+        'updated_by' => 'integer'
     ];
 
     /**
@@ -147,6 +155,10 @@ class Post extends Model
         'slug' => 'required',
         'status' => 'required'
     ];
+
+    public function getTableColumns() {
+        return $this->getConnection()->getSchemaBuilder()->getColumnListing($this->getTable());
+    }
 
     
 }

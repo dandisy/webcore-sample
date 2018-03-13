@@ -38,7 +38,7 @@ class Menu extends Model
 {
     //use SoftDeletes;
 
-    public $table = 'menus';
+    public $table = 'admin_menus';
     
 
     //protected $dates = ['deleted_at'];

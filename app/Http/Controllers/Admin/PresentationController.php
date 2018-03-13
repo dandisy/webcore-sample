@@ -10,6 +10,8 @@ use App\Repositories\PresentationRepository;
 use Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
+use Illuminate\Support\Facades\Auth; // add by dandisy
+use Illuminate\Support\Facades\Storage; // add by dandisy
 
 class PresentationController extends AppBaseController
 {
@@ -40,7 +42,25 @@ class PresentationController extends AppBaseController
      */
     public function create()
     {
-        return view('admin.presentations.create');
+        // add by dandisy
+        $page = \App\Models\Page::all();
+        $component = \App\Models\Component::all();
+        
+$themes = array_map(function ($file) {
+            $fileName = explode('.', $file);
+            if(count($fileName) > 0) {
+                return $fileName[0];
+            }
+        }, Storage::disk('theme')->allFiles());
+
+        $themes = array_combine($themes, $themes);
+
+        // edit by dandisy
+        //return view('admin.presentations.create');
+        return view('admin.presentations.create')
+            ->with('page', $page)
+            ->with('component', $component)
+            ->with('themes', $themes);
     }
 
     /**
@@ -53,6 +73,8 @@ class PresentationController extends AppBaseController
     public function store(CreatePresentationRequest $request)
     {
         $input = $request->all();
+
+        $input['created_by'] = Auth::user()->id;
 
         $presentation = $this->presentationRepository->create($input);
 
@@ -90,6 +112,19 @@ class PresentationController extends AppBaseController
      */
     public function edit($id)
     {
+        // add by dandisy
+        $page = \App\Models\Page::all();
+        $component = \App\Models\Component::all();
+        
+$themes = array_map(function ($file) {
+            $fileName = explode('.', $file);
+            if(count($fileName) > 0) {
+                return $fileName[0];
+            }
+        }, Storage::disk('theme')->allFiles());
+
+        $themes = array_combine($themes, $themes);
+
         $presentation = $this->presentationRepository->findWithoutFail($id);
 
         if (empty($presentation)) {
@@ -98,7 +133,13 @@ class PresentationController extends AppBaseController
             return redirect(route('admin.presentations.index'));
         }
 
-        return view('admin.presentations.edit')->with('presentation', $presentation);
+        // edit by dandisy
+        //return view('admin.presentations.edit')->with('presentation', $presentation);
+        return view('admin.presentations.edit')
+            ->with('presentation', $presentation)
+            ->with('page', $page)
+            ->with('component', $component)
+            ->with('themes', $themes);
     }
 
     /**
@@ -111,6 +152,10 @@ class PresentationController extends AppBaseController
      */
     public function update($id, UpdatePresentationRequest $request)
     {
+        $input = $request->all();
+
+        $input['updated_by'] = Auth::user()->id;
+
         $presentation = $this->presentationRepository->findWithoutFail($id);
 
         if (empty($presentation)) {
@@ -119,7 +164,7 @@ class PresentationController extends AppBaseController
             return redirect(route('admin.presentations.index'));
         }
 
-        $presentation = $this->presentationRepository->update($request->all(), $id);
+        $presentation = $this->presentationRepository->update($input, $id);
 
         Flash::success('Presentation updated successfully.');
 

@@ -11,38 +11,50 @@
         "inIndex": false
     },
     {
-        "name": "component",
-        "dbType": "string",
-        "htmlType": "text",
+        "name": "page_id",
+        "dbType": "integer",
+        "htmlType": "select,relation:page=title=id",
         "validations": "required",
-        "searchable": true,
-        "fillable": true,
-        "primary": false,
-        "inForm": true,
-        "inIndex": true
-    },
-    {
-        "name": "position",
-        "dbType": "string",
-        "htmlType": "text",
-        "validations": "required",
-        "searchable": true,
-        "fillable": true,
-        "primary": false,
-        "inForm": true,
-        "inIndex": true
-    },
-    {
-        "name": "datasource",
-        "dbType": "string",
-        "htmlType": "text",
-        "validations": null,
         "searchable": true,
         "fillable": true,
         "primary": false,
         "inForm": true,
         "inIndex": true,
-        "dbNullable" : true
+        "relation": "mt1,Page,page_id,id"
+    },
+    {
+        "name": "media",
+        "dbType": "string",
+        "htmlType": "select,Desktop,Mobile",
+        "validations": "required",
+        "searchable": true,
+        "fillable": true,
+        "primary": false,
+        "inForm": true,
+        "inIndex": true
+    },
+    {
+        "name": "component_id",
+        "dbType": "string",
+        "htmlType": "select,relation:component=name=id",
+        "validations": "required",
+        "searchable": true,
+        "fillable": true,
+        "primary": false,
+        "inForm": true,
+        "inIndex": true,
+        "relation": "mt1,Component,component_id,id"
+    },
+    {
+        "name": "position",
+        "dbType": "string",
+        "htmlType": "select,theme",
+        "validations": "required",
+        "searchable": true,
+        "fillable": true,
+        "primary": false,
+        "inForm": true,
+        "inIndex": true
     },
     {
         "name": "order",
@@ -55,17 +67,6 @@
         "inForm": true,
         "inIndex": true,
         "dbNullable" : true
-    },
-    {
-        "name": "page_id",
-        "dbType": "integer",
-        "htmlType": "number",
-        "validations": "required",
-        "searchable": true,
-        "fillable": true,
-        "primary": false,
-        "inForm": true,
-        "inIndex": true
     },
     {
         "name": "created_by",
@@ -96,21 +97,21 @@
         "dbType": "timestamp",
         "htmlType": null,
         "validations": null,
-        "searchable": false,
+        "searchable": true,
         "fillable": false,
         "primary": false,
         "inForm": false,
-        "inIndex": false
+        "inIndex": true
     },
     {
         "name": "updated_at",
         "dbType": "timestamp",
         "htmlType": null,
         "validations": null,
-        "searchable": false,
+        "searchable": true,
         "fillable": false,
         "primary": false,
         "inForm": false,
-        "inIndex": false
+        "inIndex": true
     }
 ]

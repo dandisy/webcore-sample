@@ -76,7 +76,7 @@ class MenuItem extends Model
 
     protected $parent = 'parent';
 
-    public $table = 'menu_items';
+    public $table = 'admin_menu_items';
     
 
     //protected $dates = ['deleted_at'];
