@@ -192,7 +192,7 @@ class DataSourceController extends AppBaseController
                     $item['data_source_id'] = $dataSource->id;
                     $item['created_by'] = Auth::user()->id;
 
-                    $this->columnAliasRepository->create($item);
+                    $this->dataColumnRepository->create($item);
                 }
             }
         }
@@ -329,7 +329,7 @@ class DataSourceController extends AppBaseController
         // get all column name of table
 
         // get data column
-        $columnAlias = $this->columnAliasRepository->findWhere(['data_source_id' => $id]);
+        $columnAlias = $this->dataColumnRepository->findWhere(['data_source_id' => $id]);
         // end get data column
 
         if (empty($dataSource)) {
